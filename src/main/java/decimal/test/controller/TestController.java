@@ -4,12 +4,10 @@ import decimal.test.dto.ResponseDTO;
 import decimal.test.dto.TestDTO;
 import decimal.test.execption.GenralException;
 import decimal.test.service.TestService;
-;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,10 +42,17 @@ public class TestController {
     }
 
 
+//    @PostMapping(value = "getByName")
+//    public List<TestDTO> getByName(@RequestBody TestDTO testDTO)
+//    {
+//        return testService.getByName(testDTO.getName());
+//    }
+
+    // getByName using Exception:
     @PostMapping(value = "getByName")
-    public List<TestDTO> getByName(@RequestBody TestDTO testDTO)
-    {
-        return testService.getByName(testDTO.getName());
+    public ResponseEntity getByName(@RequestBody TestDTO testDTO) throws GenralException {
+        ResponseDTO responseDTO = testService.getByName(testDTO.getName());
+        return new ResponseEntity(responseDTO, HttpStatus.OK);
     }
 
     @PostMapping(value = "getByAddress")

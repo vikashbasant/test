@@ -58,9 +58,28 @@ public class TestServiceImpl implements TestService{
         return new ResponseDTO("SUCCESS", "200", "user_details_fetch_successfully", testDTO);
     }
 
+//    @Override
+//    public List<TestDTO> getByName(String name) {
+//        List<Test> testList =  testRepo.findByName(name);
+//        List<TestDTO> testDTOList =  new ArrayList<>();
+//        testList.forEach(test -> {
+//            TestDTO testDTO = new TestDTO();
+//            testDTO.setId(test.getId());
+//            testDTO.setName(test.getName());
+//            testDTO.setAddress(test.getAddress());
+//            testDTOList.add(testDTO);
+//        });
+//        return testDTOList;
+//    }
+
+
+
     @Override
-    public List<TestDTO> getByName(String name) {
+    public ResponseDTO getByName(String name) throws GenralException {
         List<Test> testList =  testRepo.findByName(name);
+        if(testList.isEmpty()){
+            throw new GenralException("TEST_500", "name does not exist", null);
+        }
         List<TestDTO> testDTOList =  new ArrayList<>();
         testList.forEach(test -> {
             TestDTO testDTO = new TestDTO();
@@ -69,7 +88,7 @@ public class TestServiceImpl implements TestService{
             testDTO.setAddress(test.getAddress());
             testDTOList.add(testDTO);
         });
-        return testDTOList;
+        return new ResponseDTO("SUCCESS", "200","name is successfully fetch", testDTOList);
     }
 
     @Override

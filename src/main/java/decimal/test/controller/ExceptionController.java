@@ -20,7 +20,7 @@ public class ExceptionController {
         return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
+    @ExceptionHandler(value = GenralException.class)
     public ResponseEntity genralException(GenralException gExcp){
         String message = gExcp.getMessage();
         String code = gExcp.getStatusCode();

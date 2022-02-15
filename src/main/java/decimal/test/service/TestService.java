@@ -14,7 +14,9 @@ public interface TestService {
 
     ResponseDTO getById(Integer id) throws GenralException;
 
-    List<TestDTO> getByName(String name);
+//    List<TestDTO> getByName(String name);
+
+    ResponseDTO getByName(String name) throws GenralException;
 
     List<TestDTO> getByAddress(String address);
 
