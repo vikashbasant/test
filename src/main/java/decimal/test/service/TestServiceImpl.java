@@ -6,6 +6,7 @@ import decimal.test.dto.TestDTO;
 import decimal.test.execption.GenralException;
 import decimal.test.repository.TestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -91,18 +92,45 @@ public class TestServiceImpl implements TestService{
         return new ResponseDTO("SUCCESS", "200","name is successfully fetch", testDTOList);
     }
 
+//    @Override
+//    public List<TestDTO> getByAddress(String address) {
+//        List<Test> testList = testRepo.findByAddress(address);
+//        List<TestDTO> testDTOList = new ArrayList<>();
+//        testList.forEach(test -> {
+//            TestDTO testDTO = new TestDTO();
+//            testDTO.setId(test.getId());
+//            testDTO.setName(test.getName());
+//            testDTO.setAddress(test.getAddress());
+//            testDTOList.add(testDTO);
+//        });
+//        return testDTOList;
+//    }
+
+
     @Override
-    public List<TestDTO> getByAddress(String address) {
-        List<Test> testList = testRepo.findByAddress(address);
-        List<TestDTO> testDTOList = new ArrayList<>();
-        testList.forEach(test -> {
-            TestDTO testDTO = new TestDTO();
-            testDTO.setId(test.getId());
-            testDTO.setName(test.getName());
-            testDTO.setAddress(test.getAddress());
-            testDTOList.add(testDTO);
-        });
-        return testDTOList;
+    public ResponseDTO getByAddress(String address) {
+        try{
+            List<Test> testList = testRepo.findByAddress(address);
+            if(testList.isEmpty()){
+                throw new GenralException("TEST_500","address does not found", null);
+            }
+            List<TestDTO> testDTOList = new ArrayList<>();
+            testList.forEach(test -> {
+                TestDTO testDTO = new TestDTO();
+                testDTO.setId(test.getId());
+                testDTO.setName(test.getName());
+                testDTO.setAddress(test.getAddress());
+                testDTOList.add(testDTO);
+            });
+            return new ResponseDTO("SUCCESS", "200", "address is fecth from database", testDTOList);
+        }catch (Exception excp){
+            ResponseDTO responseDTO = null;
+            if(excp instanceof GenralException){
+                 responseDTO= new ResponseDTO("FAILURE", ((GenralException) excp).getStatusCode(), ((GenralException) excp).getMessage(), ((GenralException) excp).getErrorMessages());
+
+            }
+            return responseDTO;
+        }
     }
 
     @Override

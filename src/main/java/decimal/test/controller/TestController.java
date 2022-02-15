@@ -55,10 +55,18 @@ public class TestController {
         return new ResponseEntity(responseDTO, HttpStatus.OK);
     }
 
+//    @PostMapping(value = "getByAddress")
+//    public List<TestDTO> getByAddress(@RequestBody TestDTO testDTO)
+//    {
+//        return testService.getByAddress(testDTO.getAddress());
+//    }
+
+    // getByAddress using Exception:
     @PostMapping(value = "getByAddress")
-    public List<TestDTO> getByAddress(@RequestBody TestDTO testDTO)
+    public ResponseEntity getByAddress(@RequestBody TestDTO testDTO)
     {
-        return testService.getByAddress(testDTO.getAddress());
+        ResponseDTO responseDTO = testService.getByAddress(testDTO.getAddress());
+        return new ResponseEntity(responseDTO, HttpStatus.OK);
     }
 
     @PostMapping(value = "getByIdAndName")
