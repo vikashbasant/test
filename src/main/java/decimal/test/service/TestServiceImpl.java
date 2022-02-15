@@ -1,7 +1,9 @@
 package decimal.test.service;
 
 import decimal.test.domain.Test;
+import decimal.test.dto.ResponseDTO;
 import decimal.test.dto.TestDTO;
+import decimal.test.execption.GenralException;
 import decimal.test.repository.TestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,18 +26,36 @@ public class TestServiceImpl implements TestService{
         testRepo.save(test);
     }
 
+//    @Override
+//    public TestDTO getById(Integer id) {
+//        // optional class use for avoid for null:
+//        Optional<Test> byId = testRepo.findById(id);
+//        TestDTO testDTO =  new TestDTO();
+//        byId.ifPresent( test -> {
+//            testDTO.setId(test.getId());
+//            testDTO.setName(test.getName());
+//            testDTO.setAddress(test.getAddress());
+//        });
+//
+//        return testDTO;
+//    }
+
     @Override
-    public TestDTO getById(Integer id) {
+    public ResponseDTO getById(Integer id) throws GenralException {
         // optional class use for avoid for null:
         Optional<Test> byId = testRepo.findById(id);
         TestDTO testDTO =  new TestDTO();
+
+        if(!byId.isPresent()){
+            throw new GenralException("TEST_500","user_does_not_exist",null);
+        }
         byId.ifPresent( test -> {
             testDTO.setId(test.getId());
             testDTO.setName(test.getName());
             testDTO.setAddress(test.getAddress());
         });
 
-        return testDTO;
+        return new ResponseDTO("SUCCESS", "200", "user_details_fetch_successfully", testDTO);
     }
 
     @Override

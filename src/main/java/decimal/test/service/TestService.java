@@ -1,6 +1,8 @@
 package decimal.test.service;
 
+import decimal.test.dto.ResponseDTO;
 import decimal.test.dto.TestDTO;
+import decimal.test.execption.GenralException;
 
 import java.util.List;
 
@@ -8,7 +10,9 @@ public interface TestService {
 
     void saveTestData(TestDTO testDTO);
 
-    TestDTO getById(Integer id);
+//    TestDTO getById(Integer id);
+
+    ResponseDTO getById(Integer id) throws GenralException;
 
     List<TestDTO> getByName(String name);
 
