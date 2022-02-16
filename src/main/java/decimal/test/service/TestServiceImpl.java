@@ -226,6 +226,31 @@ public class TestServiceImpl implements TestService{
         testRepo.updateName(testDTO.getName(), testDTO.getAddress());
     }
 
+    @Override
+    public void updateById(TestDTO testDTO) {
+        testRepo.updateId(testDTO.getId(),testDTO.getName(), testDTO.getAddress());
+    }
+
+    @Override
+    public void updateByAddress(TestDTO testDTO) {
+        testRepo.updateAddress(testDTO.getName(), testDTO.getAddress());
+    }
+
+    @Override
+    public void updateByIdAndName(TestDTO testDTO) {
+        testRepo.updateByIdAndName(testDTO.getId(), testDTO.getName(), testDTO.getAddress());
+    }
+
+    @Override
+    public void updateByIdAndAddress(TestDTO testDTO) {
+        testRepo.updateByIdAndAddress(testDTO.getId(), testDTO.getName(), testDTO.getAddress());
+    }
+
+    @Override
+    public void updateByNameAndAddress(TestDTO testDTO) {
+        testRepo.updateByNameAndAddress(testDTO.getName(), testDTO.getAddress());
+    }
+
 
 }
 

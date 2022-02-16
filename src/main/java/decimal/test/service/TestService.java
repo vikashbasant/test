@@ -42,4 +42,14 @@ public interface TestService {
     void deleteByNameAndAddress(TestDTO testDTO);
 
     void updateByName(TestDTO testDTO);
+
+    void updateById(TestDTO testDTO);
+
+    void updateByAddress(TestDTO testDTO);
+
+    void updateByIdAndName(TestDTO testDTO);
+
+    void updateByIdAndAddress(TestDTO testDTO);
+
+    void updateByNameAndAddress(TestDTO testDTO);
 }

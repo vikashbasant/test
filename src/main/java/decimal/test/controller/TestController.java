@@ -1,5 +1,6 @@
 package decimal.test.controller;
 
+import decimal.test.domain.Test;
 import decimal.test.dto.ResponseDTO;
 import decimal.test.dto.TestDTO;
 import decimal.test.execption.GenralException;
@@ -122,10 +123,44 @@ public class TestController {
     }
 
 
-    @PostMapping("update")
-    public String updateDB(@RequestBody  TestDTO testDTO){
+    @PostMapping("updateByName")
+    public String updateDBName(@RequestBody  TestDTO testDTO){
         testService.updateByName(testDTO);
         return "Database updated";
     }
+
+    @PostMapping("updateById")
+    public String updateDBId(@RequestBody TestDTO testDTO){
+        testService.updateById(testDTO);
+        return "Database is update with Id";
+    }
+
+
+    @PostMapping("updateByAddress")
+    public String updateDbAddress(@RequestBody TestDTO testDTO){
+        testService.updateByAddress(testDTO);
+        return "Database is update with Address";
+    }
+
+    @PostMapping("updateByIdAndName")
+    public String updateDbIdAndName(@RequestBody TestDTO testDTO){
+        testService.updateByIdAndName(testDTO);
+        return "Database is update with Id and Name";
+    }
+
+
+    @PostMapping("updateByIdAndAddress")
+    public String updateDbIdAndAddress(@RequestBody TestDTO testDTO){
+        testService.updateByIdAndAddress(testDTO);
+        return "Database is update with Id and Address";
+    }
+
+
+    @PostMapping("updateByNameAndAddress")
+    public String updateDbNameAndAddress(@RequestBody TestDTO testDTO){
+        testService.updateByNameAndAddress(testDTO);
+        return "Database is update with Name and Address";
+    }
+
 
 }
