@@ -28,11 +28,11 @@ public class ResponseDTO {
         this.response = response;
     }
 
-    public ResponseDTO(String status, String statusCode, String message, Object errorResponse){
+    public ResponseDTO(String status, String statusCode, String message, Object response){
         this.status = status;
         this.statusCode = statusCode;
         this.message = message;
-        this.response = errorResponse;
+        this.response = response;
     }
 
 

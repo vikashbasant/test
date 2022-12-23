@@ -122,11 +122,13 @@ public class TestServiceImpl implements TestService{
                 testDTO.setAddress(test.getAddress());
                 testDTOList.add(testDTO);
             });
-            return new ResponseDTO("SUCCESS", "200", "address is fecth from database", testDTOList);
+            return new ResponseDTO("SUCCESS", "200",
+                    "address is fecth from database", testDTOList);
         }catch (Exception excp){
             ResponseDTO responseDTO = null;
             if(excp instanceof GenralException){
-                 responseDTO= new ResponseDTO("FAILURE", ((GenralException) excp).getStatusCode(), ((GenralException) excp).getMessage(), ((GenralException) excp).getErrorMessages());
+                 responseDTO= new ResponseDTO("FAILURE", ((GenralException) excp).getStatusCode(),
+                         ((GenralException) excp).getMessage(), ((GenralException) excp).getErrorMessages());
 
             }
             return responseDTO;
